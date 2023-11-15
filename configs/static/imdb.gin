@@ -1,0 +1,33 @@
+load_datasets.dataset_name = 'imdb'
+load_datasets.train_batch_size = 64
+load_datasets.valid_batch_size = 64
+load_datasets.test_batch_size = 64
+
+# Global configuration of datasets.
+IMDBDataset.distractor_name = 'has_an'
+IMDBDataset.test_distractor_label_value = 0
+IMDBDataset.test_discriminator_label_value = 0
+IMDBDataset.expt = 'conflict'
+IMDBDataset.numdata = None
+
+train/IMDBDataset.split = 'train'
+valid/IMDBDataset.split = 'valid'
+test/IMDBDataset.split = 'test'
+
+train.max_num_steps = 5000
+train.validation_interval = 10
+early_stopping_tolerance = 0.01
+early_stopping_min_steps = 100
+early_stopping_patience = 10
+
+train.opt = @adam()
+adam.learning_rate = 1e-3
+objective.regularization_coefficient = 0.0
+ema_update.epsilon = 1.0  # No weight averaging.
+
+# Select model type here.
+model = @RNN
+train.model = %model
+evaluate.model = %model
+
+RNN.lstm_layers = [40]

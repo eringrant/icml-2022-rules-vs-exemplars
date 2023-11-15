@@ -1,0 +1,19 @@
+#load_datasets.dataset_name = 'biased_exposure_celeb_a'
+load_datasets.dataset_name = 'biased_exposure_celeb_a/CelebA-rho0_0.0-rho1_0.0-discriminator_Mouth_Slightly_Open-distractor_Wearing_Lipstick'
+load_datasets.train_batch_size = 128
+load_datasets.valid_batch_size = 256
+load_datasets.test_batch_size = 256
+
+train.max_num_steps = 50000
+train.validation_interval = 10
+train.early_stopping_tolerance = 0.01
+train.early_stopping_min_steps = 300
+train.early_stopping_patience = 100
+
+train.opt = @adam()
+adam.learning_rate = 0.001
+objective.regularization_coefficient = 0.0001
+
+model = @ResNet18
+train.model = %model
+evaluate.model = %model

@@ -1,0 +1,15 @@
+name: rules-vs-exemplars
+
+channels:
+  - default
+  - conda-forge
+
+dependencies:
+  - python==3.8
+  - numpy>=1.19.3
+  - pandas>=1.4.2
+  - jupyter
+  - pre-commit
+  - pip
+  - pip:
+    - -e .

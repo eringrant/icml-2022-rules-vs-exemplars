@@ -1,0 +1,31 @@
+load_datasets.dataset_name = 'linear'
+load_datasets.train_batch_size = 50
+load_datasets.valid_batch_size = 50
+load_datasets.test_batch_size = 50
+
+# Global configuration of datasets.
+LinearDataset.num_datapoints = 75
+
+train/LinearDataset.split = 'train'
+valid/LinearDataset.split = 'valid'
+test/LinearDataset.split = 'test'
+
+train.num_steps = 1500
+train.validation_interval = 100
+train.opt = @adam()
+train.visualize = True
+train.evaluate_on_test = True
+adam.learning_rate = 5e-2
+objective.regularization_coefficient = 0.01
+# No weight averaging.
+ema_update.epsilon = 1.0
+
+# Select model type here.
+model = @MLP
+
+train.model = %model
+evaluate.model = %model
+
+MLP.layers = None
+MLP.n_hiddens = 2
+

@@ -1,0 +1,33 @@
+load_datasets.dataset_name = 'biased_exposure_celeb_a'
+load_datasets.train_batch_size = 128
+load_datasets.valid_batch_size = 256
+load_datasets.test_batch_size = 256
+
+train.max_num_steps = 50000
+train.validation_interval = 10
+train.early_stopping_tolerance = 0.01
+train.early_stopping_min_steps = 300
+train.early_stopping_patience = 100
+
+train.opt = @adam()
+adam.learning_rate = 0.001
+objective.regularization_coefficient = 0.0
+
+model = @VisionTransformer
+train.model = %model
+evaluate.model = %model
+
+# ViT config.
+VisionTransformer.num_classes = 2
+VisionTransformer.hidden_size = 192
+
+VisionTransformer.patches = @ViTPatchesConfig()
+ViTPatchesConfig.size = (16, 16)
+
+VisionTransformer.transformer = {
+  'mlp_dim': 768,
+  'num_heads': 3,
+  'num_layers': 12,
+  'attention_dropout_rate': 0.0,
+  'dropout_rate': 0.0,
+}
